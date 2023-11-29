@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .App {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    scroll-behavior: smooth;
+    font-family: Poppins, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: overlay;
+  }
+
+  .imgCont{
+    overflow: hidden;
+  }
+  .image{
+    transition: 2s;
+  }
+  .image:hover{
+    transform: scale(1.1);
+  }
+
+  .link {
+    display: inline-flex;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    line-height: 12px;
+    align-self: center;
+    margin: 8px;
+    padding: 4px;
+  }
+  .link:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    left: 50%;
+    bottom: -3px;
+    transition: 0.3s;
+  }
+  .link:hover::before {
+    background-color:  #333;
+    width: 100%;
+    left: 0;
+  }
+  .link.active {
+    color: #333;
+  }
+  .link.active::before {
+    background-color:#333;
+    width: 100%;
+    left: 0;
+  }
+
+  .link2:hover{
+    color: #333;
+    width: 100%;
+    left: 0;
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  .link2.active{
+    color: #333;
+    width: 100%;
+    left: 0;
+    transform: scale(1.1);
+  }
+  
+  .link3 {
+    display: inline-flex;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+  }
+  .link3:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    left: 50%;
+    bottom: -3px;
+    transition: 0.3s;
+  }
+  .link3:hover::before {
+    background-color: #333;
+    width: 100%;
+    left: 0;
+    cursor:'pointer';
+  }
+  .link3.active{
+    color:#333;
+  }
+  .link3.active::before {
+    background-color:#fff;
+    width: 100%;
+    left: 0;
+  }
+
+  .col-10 img {
+    z-index: 1;
+  }
+  h3, small, .col-10 img {
+    filter: drop-shadow(1px 2px 2px black);
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  h3:hover, .col-10 img:hover{
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+  }
+
+  .icon{
+    width: 30px;
+    transition: 0.3s;
+  }
+  .icon a:hover{
+    transform: scale(1.5);
+  }
+  /* bootstrap */
+  #header {
+    background: transparent;
+  }
+  
+  #search {
+    border: 1px solid blue;
+    color: blue;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  #search:hover {
+    background-color: blue;
+    color: #fff;
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+  }
+
+  #signup-btn, #gallery-btn {
+    background-color: blue;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+    border: none;
+  }
+  #signup-btn:hover, #gallery-btn:hover  {
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+    background-color: mediumblue;
+  }
+
+  #login-btn {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  #login-btn:hover {
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+  }
+
+  #cont {
+    overflow: hidden;
+  }
+  #logo{
+    transition: 2s;
+  }
+  #logo:hover{
+    transform: scale(1.1);
+  }
