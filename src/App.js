@@ -11,7 +11,27 @@ import Contact from './Pages/Contact';
 import Gallery from './Pages/Gallery';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
+import {
+  faFacebook,
+  faGoogle,
+  faYahoo
+} from "@fortawesome/free-brands-svg-icons"
 import './App.css';
+
+const accts = [
+  {
+    icon: faGoogle,
+    url: "https://www.google.com",
+  },
+  {
+    icon: faFacebook,
+    url: "https://facebook.com",
+  },
+  {
+    icon: faYahoo,
+    url: "https://yahoo.com",
+  }
+]
 
 function App() {
   return (
@@ -20,13 +40,13 @@ function App() {
       <Header/>
       <main>
         <Routes>
-          <Route path="/" exact element={<Home/>}/>
-          <Route path="/gallery" element={<Gallery/>} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="/explore" element={<Explore/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/" index exact element={<Home/>}/>
+          <Route path="gallery" element={<Gallery/>} />
+          <Route path="contact" element={<Contact/>} />
+          <Route path="explore" element={<Explore/>} />
+          <Route path="about" element={<About/>} />
+          <Route path="signup" element={<Signup data={accts}/>} />
+          <Route path="login" element={<Login data={accts}/>} />
           <Route path="*" element={<Error/>} />
         </Routes>
       </main>

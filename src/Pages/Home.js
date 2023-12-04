@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Container, Button, HStack} from "@chakra-ui/react";
 import Card from "../components/Cards"
+import "../App.css";
 
 const categories = [
   {
@@ -35,7 +36,9 @@ const Home = () => {
               <p className="lead">From stunning visualizations to mind-bending designs, unleash your imagination and bring your ideas to life. No more barriers, no more limitations – immerse yourself in a world where imagination knows no bounds.</p>
               <div className="d-grid gap-2 d-md-flex justify-content-md-start">
                 <Button as='a' href='/signup' id="signup-btn" boxShadow='dark-lg' justifySelf="space-between" fontWeight='bold' fontSize={18} size={['sm','md','lg']} color='#fff' rounded='15px'>Sign up</Button>
-                <Button as='a' href='/login' id="login-btn" boxShadow='dark-lg' justifySelf="space-between" fontWeight='bold' fontSize={18} size={['sm','md','lg']} rounded='15px'>Log in</Button>
+                <Button as='a' href='/login' id="login-btn" boxShadow='dark-lg' justifySelf="space-between" fontWeight='bold' fontSize={18} size={['sm','md','lg']} color="#6c757d" rounded='15px' _hover={{bg:'#6c757d'}}>
+                  Log in
+                </Button>
               </div>
             </div>
           </div>
@@ -66,7 +69,9 @@ const Home = () => {
             </div>
               </div>
               <div className="container d-flex justify-content-center align-items-center col-md-4">
-                <p><a className="btn btn-lg btn-primary" id="gallery-btn" href="gallery.html">View Gallery</a></p>
+                  <Button as='a' href='gallery' id="gallery-btn" boxShadow='dark-lg' justifySelf="space-between" fontWeight='bold' fontSize={18} size={['sm','md','lg']} color='#fff' rounded='15px'>
+                    View Gallery
+                  </Button>
                 {/* <button type="button" id="gallery-btn" onclick="" className="btn btn-primary btn-lg ml-5">Go to Gallery</button> */}
               </div>
             </div>

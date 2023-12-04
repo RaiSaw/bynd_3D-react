@@ -1,4 +1,4 @@
-import { Text, VStack, CardBody, Card, HStack, Box, Image} from "@chakra-ui/react";
+import { Text, VStack, CardBody, Card, HStack, Box, Image } from "@chakra-ui/react";
 import React from "react";
 import {motion} from 'framer-motion'
 
@@ -6,14 +6,14 @@ import {motion} from 'framer-motion'
 const Categories = ({ title, alt, imageSrc }) => {
     return(
         <Card
-        as={motion.span}
+        ass={motion.span}
         color="#333"
         borderRadius="xl"
         boxShadow='dark-lg'
         left={0}
         right={0}
         w='100%'
-        bg={imageSrc}
+        /* bg={imageSrc} */
         /* alt={alt} */
         /*whileHover={{
           scale: 1.2,
