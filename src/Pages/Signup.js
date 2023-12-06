@@ -72,7 +72,7 @@ const Signup = ({data}) => {
     e.preventDefault()
     console.log("Thanks for creating an account", firstName.value, "!")
     setSubmitted(true);
-    clearForm();
+    /* clearForm(); */
   };
 
   const [show, setShow] = useState(false)

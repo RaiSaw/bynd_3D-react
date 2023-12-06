@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Image, Box, Flex, VStack, Container, Text, HStack} from "@chakra-ui/react"
+import {Image, Circle} from "@chakra-ui/react"
 import '../App.css';
 
 export default class Footer extends Component {
@@ -8,9 +8,9 @@ export default class Footer extends Component {
     return (
       <footer className="footer d-flex flex-row flex-wrap justify-content-between align-items-center py-4 px-3 my-4 border-top">
       <div className="col d-flex space-x-4">
-        <Box overflow='hidden' borderRadius='full' boxShadow='dark-lg'>
+        <Circle overflow='hidden' boxShadow='dark-lg'>
           <Link to="/"><Image className='image' src="./Assets/bynd.png" alt="Logo" boxSize='200px'/></Link>
-        </Box>
+        </Circle>
         <span className="text-body-secondary align-self-center">&copy; Bynd 2023</span>
       </div>
       <div className="col d-flex space-x-4 justify-content-end">

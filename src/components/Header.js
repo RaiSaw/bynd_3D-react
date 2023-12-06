@@ -2,7 +2,7 @@ import '../App.css'
 import { NavLink, Link } from "react-router-dom";
 import React, { useEffect, useRef } from "react";
 import {HamburgerIcon} from '@chakra-ui/icons'
-import { Box, Image} from "@chakra-ui/react";
+import { Circle, Image, Spacer} from "@chakra-ui/react";
 
 const Header = () => {
   const headerRef = useRef(null);
@@ -42,9 +42,9 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
       <div className="container-fluid">
-      <Box overflow='hidden' borderRadius='full' boxShadow='dark-lg'>
+      <Circle overflow='hidden' boxShadow='dark-lg'>
         <Link to="/" className="logo"><Image className='image' src="./Assets/bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
-      </Box>
+      </Circle>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -57,7 +57,7 @@ const Header = () => {
             <a className="nav-link" aria-current="page" href="/">Home</a>
           */}
           {/* <li className="nav-item"> */}
-            <NavLink className="link" to="/gallery">Gallery</NavLink>
+          <NavLink className="link" to="/gallery">Gallery</NavLink>
           {/* </li> */}
           {/* <li className="nav-item">
             <a className="nav-link" href="/gallery.html">Gallery</a>
@@ -87,7 +87,8 @@ const Header = () => {
             </ul>
           </li> */}
         </ul>
-        <form className="d-flex col-4" role="search">
+        <Spacer/>
+        <form className="d-flex col-lg-6" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
             <button id="search" className="btn btn-outline-primary" type="submit">Search</button>
         </form>
