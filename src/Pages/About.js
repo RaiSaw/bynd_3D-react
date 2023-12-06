@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Container} from "@chakra-ui/react";
+import "../App.css";
 
 const About = () => {
   return (

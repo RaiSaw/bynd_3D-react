@@ -2,7 +2,7 @@ import '../App.css'
 import { NavLink, Link } from "react-router-dom";
 import React, { useEffect, useRef } from "react";
 import {HamburgerIcon} from '@chakra-ui/icons'
-import { Box, VStack, HStack, MenuDivider, Hide, Flex, Spacer, Menu, MenuItem, MenuButton, Show, MenuList, IconButton, Image, Container} from "@chakra-ui/react";
+import { Box, Image} from "@chakra-ui/react";
 
 const Header = () => {
   const headerRef = useRef(null);
@@ -43,7 +43,7 @@ const Header = () => {
     <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary">
       <div className="container-fluid">
       <Box overflow='hidden' borderRadius='full' boxShadow='dark-lg'>
-        <Link to="/" className="logo"><Image className='image' src="./bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
+        <Link to="/" className="logo"><Image className='image' src="./Assets/bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
       </Box>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -87,7 +87,7 @@ const Header = () => {
             </ul>
           </li> */}
         </ul>
-        <form className="d-flex" role="search">
+        <form className="d-flex col-4" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
             <button id="search" className="btn btn-outline-primary" type="submit">Search</button>
         </form>

@@ -1,15 +1,10 @@
 import { Text, VStack, CardBody, Card, HStack, Image, CloseButton} from "@chakra-ui/react";
-import React from "react";
+import '../App.css'
 import {motion} from 'framer-motion';
 import React, {useState} from 'react'
 import {Formik, Field} from 'formik'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faGoogle,
-  faYahoo
-} from "@fortawesome/free-brands-svg-icons"
 import * as Yup from 'yup';
 
 

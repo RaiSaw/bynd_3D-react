@@ -7,23 +7,6 @@ import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Yup from 'yup';
 
-/* let userName = document.getElementById("countInput").value;
-  localStorage.setItem("lastNameInput", counter); */
-
-
-/*
-  if (value === "") {
-    return;
-  }
-   */
-
- /*  interval = setInterval(() => {
-    if (value === 0) {
-      countOutput.innerHTML = "Countdown complete!";
-      window.localStorage.removeItem("lastInput");
-      clearInterval(interval);
-      return;
-    } */
 const PasswordErrorMessage = () => {
   return (
     <p className="FieldError">Password should have at least 8 characters</p>
@@ -34,9 +17,14 @@ const EmailErrorMessage = () => {
     <p className="FieldError">Please type a valid email address</p>
   );
 };
-const NameErrorMessage = () => {
+const FNameErrorMessage = () => {
   return (
-    <p className="FieldError">Name should have at least 2 characters</p>
+    <p className="FieldError">First name should have at least 2 characters</p>
+  );
+};
+const LNameErrorMessage = () => {
+  return (
+    <p className="FieldError">Please type your last name</p>
   );
 };
 
@@ -62,15 +50,15 @@ const Signup = ({data}) => {
   const getIsFormValid = () => {
     // Validate form
     return (
-    firstName.value.length > 2 &&
-    lastName.value.length > 2  &&
+    firstName.value.length >= 2 &&
+    lastName.value &&
     validateEmail(email.value) &&
     password.value.length >= 8
     )
   };
 
-  let userName = window.localStorage.getItem("Username") ?? firstName.value;
-  window.localStorage.setItem("Username", userName);
+  let username = window.localStorage.getItem("lastInput") ?? firstName.value;
+  window.localStorage.setItem("lastInput", firstName.value);
 
   const clearForm = () => {
     // reset form after submit
@@ -84,10 +72,12 @@ const Signup = ({data}) => {
     e.preventDefault()
     console.log("Thanks for creating an account", firstName.value, "!")
     setSubmitted(true);
-    /* clearForm(); */
+    clearForm();
   };
+
   const [show, setShow] = useState(false)
   const handlePw = () => setShow(!show)
+
   return (
     <Flex py={20} width='full' height={800} align='center' justify='center'>
     <Box
@@ -126,7 +116,7 @@ const Signup = ({data}) => {
               First name <sup>*</sup>
             </label>
             <input
-              id="first name"
+              id="firstname"
               type="text"
               name="first name"
               placeholder="First name"
@@ -147,7 +137,7 @@ const Signup = ({data}) => {
                 return error;
               }} */
             />
-            {firstName.isTouched && firstName.value.length < 2 ? (<NameErrorMessage/>): null}
+            {firstName.isTouched && firstName.value.length < 2 ? (<FNameErrorMessage/>): null}
           </div>
           <div className="Field">
             <label>
@@ -162,13 +152,13 @@ const Signup = ({data}) => {
               /* minLength={2}
               required */
               onChange={(e)=> {
-                setLastName({ ...lastName, value:e.target.value})
+                setLastName({...lastName, value:e.target.value})
               }}
               onBlur={() => {
                 setLastName({...lastName, isTouched: true})
               }}
               />
-              {lastName.isTouched && lastName.value.length < 2 ? (<NameErrorMessage/>): null}
+              {lastName.isTouched && !lastName.value ? (<LNameErrorMessage/>): null}
           </div>
           <div className="Field">
             <label>
@@ -181,7 +171,7 @@ const Signup = ({data}) => {
               placeholder="Email address"
               value={email.value}
               onChange={(e)=> {
-                setEmail({ ...email, value:e.target.value})
+                setEmail({...email, value:e.target.value})
               }}
               /* required */
               onBlur={() => {
@@ -203,10 +193,10 @@ const Signup = ({data}) => {
               value={password.value}
               /* required */
               onChange={(e) => {
-                setPassword({ ...password, value: e.target.value })
+                setPassword({...password, value: e.target.value })
               }}
               onBlur={() => {
-                setPassword({ ...password, isTouched: true})
+                setPassword({...password, isTouched: true})
               }}
               />
               <IconButton
@@ -227,7 +217,7 @@ const Signup = ({data}) => {
           </Checkbox>
           <button className="signup-btn2" type="submit" disabled={!getIsFormValid()}>Create account</button>
         </fieldset>
-        <Divider py={2}/>
+        <Divider className='divi' py={2}/>
           <VStack spacing={4} align='center' justify='center'>
           <Text align='center' justify='center'>
             or sign up with

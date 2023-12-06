@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Container} from "@chakra-ui/react";
+import "../App.css";
 
 const Error = () => {
   return (
@@ -10,7 +11,7 @@ const Error = () => {
       right={0}
       margin='0 auto'
       height={700}
-      bg='#fff'
+      bg='teal'
       alignContent='center'
       justifyContent='center'
       justifyItems='center'
