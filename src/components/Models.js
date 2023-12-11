@@ -14,12 +14,9 @@ const Models = () => {
   const sorted = () => {
     return (
     models.toSorted((a, b)=> a.title.localeCompare(b.title))
-    .map((model) => (
+    .map(({...props}) => (
       <ModelCard
-      key={model.title}
-      title={model.title}
-      type={model.type}
-      imgUrl={model.imgUrl}
+      {...props}
       />
     )))
 

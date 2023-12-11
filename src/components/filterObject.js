@@ -7,13 +7,10 @@ const Object = () => {
     const filter1 = models
       .filter((model) => model.type === 'object')
       .toSorted((a, b)=> a.title.localeCompare(b.title))
-      .map((model) => {
+      .map(({...props}) => {
         return (
           <ModelCard
-          key={model.title}
-          title={model.title}
-          type={model.type}
-          imgUrl={model.imgUrl}
+          {...props}
           />
         )
       })

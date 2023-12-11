@@ -88,14 +88,6 @@ const Login = ({data}) => {
                   type="email"
                   variant="filled"
                   placeholder='Email address'
-                  /*required
-                  validate={(value) => {
-                    let error;
-                    if (value==''){
-                      error = 'Please enter a valid email.'
-                    }
-                    return error;
-                  }}*/
                   />
                   <FormErrorMessage>{errors.email}</FormErrorMessage>
                 </FormControl>
@@ -109,13 +101,6 @@ const Login = ({data}) => {
                   type={show ? 'text' : 'password'}
                   variant="filled"
                   placeholder='Password'
-                  /*validate={(value) => {
-                    let error;
-                    if (value.length < 6) {
-                      error = "Password must contain at least 8 characters";
-                    }
-                    return error;
-                  }}*/
                   />
                   <InputRightElement>
                   <IconButton

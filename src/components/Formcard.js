@@ -1,11 +1,7 @@
-import { Text, VStack, CardBody, Card, HStack, Image, CloseButton} from "@chakra-ui/react";
+import {CardBody, Card, CloseButton} from "@chakra-ui/react";
 import '../App.css'
 import {motion} from 'framer-motion';
 import React, {useState} from 'react'
-import {Formik, Field} from 'formik'
-import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as Yup from 'yup';
 
 
 const FormCard = ({ title, alt, imageSrc }) => {
