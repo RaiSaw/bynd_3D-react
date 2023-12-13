@@ -32,7 +32,6 @@ const Gallery = () => {
   return (
     <Box
     as="section"
-    /* w={['80%', '100%', '100%']} */
     left={0}
     right={0}
     mt={14}

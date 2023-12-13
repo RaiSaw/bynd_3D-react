@@ -1,11 +1,9 @@
 import "../App.css";
 import { useState } from "react";
 import { validateEmail } from "../utils";
-import { IconButton, CloseButton, Text, Checkbox, Divider, VStack, Box, Flex, HStack } from "@chakra-ui/react";
-import {Formik, Field} from 'formik'
+import { IconButton, CloseButton, Text, Checkbox, Divider, VStack, Box, Flex, HStack, Button } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as Yup from 'yup';
 
 const PasswordErrorMessage = () => {
   return (
@@ -236,9 +234,14 @@ const Signup = ({data}) => {
     <VStack>
     <h2>Thanks for creating an account {firstName.value} !</h2>
     <Text  as='h4' align='center' justify='center'>
-      Email: {email.value} </Text>
+      Email: {email.value}
+    </Text>
     <Text as='h4' align='center' justify='center'>
-      Password: {password.value}</Text>
+      Password: {password.value}
+    </Text>
+    <Button as='a' href='/login' mt='4' id="login-btn2" boxShadow='dark-lg' justifySelf="center" fontWeight='bold' fontSize={18} size={['sm','md','lg']} rounded='15px'>
+      Log in
+    </Button>
     </VStack>
     )
   }

@@ -68,7 +68,7 @@ export const models = [
       title:"Flare Star",
       id:11,
       type:"abstract",
-      imgUrl:"Assets//simon-lee-vYsX30q0ARE-unsplash.jpg",
+      imgUrl:"Assets/simon-lee-vYsX30q0ARE-unsplash.jpg",
     },
     {
       title:"Somewhere Galaxy",

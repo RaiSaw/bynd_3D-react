@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Container, Button, HStack} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import Card from "../components/Cards"
 import "../App.css";
 
