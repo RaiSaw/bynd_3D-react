@@ -1,4 +1,4 @@
-import { Text, VStack, CardBody, Card, HStack, Box, Image } from "@chakra-ui/react";
+import { Text, VStack, CardBody, Card, HStack } from "@chakra-ui/react";
 import React from "react";
 import {motion} from 'framer-motion'
 import '../App.css'
@@ -26,7 +26,7 @@ const Categories = ({ title, alt, imageSrc }) => {
        /*  backdropFilter='auto'
         backdropBlur='12px' */
         /* backdropContrast='30%'*/
-        /* framer-motion */
+        /* Framer-motion */
         /*whileHover={{
           scale: 1.2,
           transition: { duration: 2 },

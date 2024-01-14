@@ -1,5 +1,4 @@
-export const models = [
-
+export const Bmodels = [
     {
       title:"Bodies",
       id:1,
@@ -71,9 +70,9 @@ export const models = [
       imgUrl:"Assets/simon-lee-vYsX30q0ARE-unsplash.jpg",
     },
     {
-      title:"Somewhere Galaxy",
+      title:"See through",
       id:12,
       type:"scene",
-      imgUrl:"Assets/javier-miranda-bDFP8PxzW1Q-unsplash.jpg",
+      imgUrl:"/Assets/gaspar-uhas-j_DmMNZK-jo-unsplash.jpg"
     },
 ]

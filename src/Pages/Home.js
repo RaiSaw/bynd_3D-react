@@ -28,7 +28,7 @@ const Home = () => {
         <div className="container col-xxl-8 px-4 py-5 my-5">
           <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div className="col-10 col-sm-8 col-lg-6">
-              <img src="/Assets/Characters2✂️.png" className="d-block mx-lg-auto img-fluid rounded" alt="3D Models" width="800" height="600" loading="lazy" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="artstation.com"/>
+              <img src="Assets/Characters2.png" className="d-block mx-lg-auto img-fluid rounded" alt="3D Models" width="800" height="600" loading="lazy" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="artstation.com"/>
               <span className="sr-only">Image credit: artstation.com</span>
             </div>
             <div className="col-lg-6">

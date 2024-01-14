@@ -1,7 +1,6 @@
 import {CardBody, Card, CloseButton} from "@chakra-ui/react";
-import '../App.css'
-import {motion} from 'framer-motion';
 import React, {useState} from 'react'
+import '../App.css'
 
 
 const FormCard = ({ title, alt, imageSrc }) => {
@@ -45,4 +44,4 @@ const FormCard = ({ title, alt, imageSrc }) => {
       </Card>
     )
 }
-export default Categories;
+export default FormCard;

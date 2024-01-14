@@ -1,129 +1,194 @@
-import React, {useState, } from 'react'
-import '../App.css'
-import models from '../models.json'
-import { useToast, Box, Text, Button, HStack, Select, SimpleGrid, VStack, Flex, Container, Card, FormLabel, Input, FormControl, FormErrorMessage } from "@chakra-ui/react";
+import React, {useState, useEffect } from 'react'
+import { Box, Text, Button, HStack, Select, SimpleGrid, VStack, Container, Card, FormLabel, Input, FormControl, FormErrorMessage } from "@chakra-ui/react";
 import ModelCard from './ModelCard'
-import Object from './filterObject';
-import style from './ModelCard'
-import { useForm } from 'react-hook-form'
-/* import {models} from '../models' */
+import axios from 'axios'
+import '../App.css'
+import { defineStyle } from '@chakra-ui/react'
+/* import model from '../models.json'  import {Bmodels} from '../models'*/
+//import Object from './filterObject';
+//import { useForm } from 'react-hook-form'
+export const style = defineStyle({
+  mb: '2',
+  borderRadius: 'xl',
+  fontWeight: 'semibold',
+  color: 'white',
+  fontSize: {
+    md: '8',
+    lg:'10',
+  },
+  textShadow: '1px 1px 1px mediumblue',
+})
 
 const Models = () => {
-  /* toggle used for object filter */
-  const [toggle, setToggle] = useState(false);
-  const toggleButton = () => {
-    setToggle(!toggle);
-  };
-  /* sorting func */
-  const [sort, setSorted] = useState(models);
+  // main state
+  const [models, setModels] = useState([]);
+  const [filters, setFilters] = useState(models);
+  // instance
+  const mock = axios.create({
+    baseURL: 'http://localhost:3001/models/'
+  });
+  console.log(models)
 
-  const handleSort = () => {
-  const sorted = models.toSorted((a, b)=> a.title.localeCompare(b.title))
-  setSorted(sorted)
+  // GET Request
+  const fetchData = async () => {
+    const getResponse = await mock.get("")
+      setModels(getResponse.data)
+      setFilters(getResponse.data)
   }
-  /* remove object func */
-  const [remove, setRemove] = useState(models);
-  
-  const handleRemove = (idToRemove) => {
-    // Create a new array without the item to be removed
-    const removed = remove.filter((model) => model.id !== idToRemove);
-    setRemove(removed);
-  };
-  /* adding an object */
-  /* -Enum-
-    const modelTypes = {
-    object: 'object',
-    scene: 'scene',
-    abstract: 'abstract',
-  } */
-  const img = 'Assets/simon-lee-U00xWfo5yJA-unsplash.jpg'
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  //DELETE Request
+  const deleteData = async (id) => {
+    await mock.delete(`${id}`)
+    .then(response => {
+      console.log(`Data with id ${id} deleted successfully:`, response.data);
+    })
+    .catch(error => {
+      console.error('Error deleting data:', error);
+    });
+    setModels(models.filter((model) => model.id !== id))
+    setFilters(models.filter((model) => model.id !== id))
+  }
+  /* Remove object func */
+  /* const handleRemove = async (idToRemove) => {
+    await mock.delete(`${idToRemove}`)
+    Create a new array without the item to be removed just in state
+    const removed = models.filter((model) => model.id !== idToRemove);
+    setModels(removed);
+    console.log(removed)
+  }; */
+
+  // Add model
   const [newModel, setNewModel] = useState({
      id: null,
      title: '',
      type: '',
-    });
+  });
+  // Image sample
+  const img = 'Assets/simon-lee-U00xWfo5yJA-unsplash.jpg'
+  // Generate ID
+  const newId = Math.max(...models.map((model) => model.id), 0) + 1;
+  /* const newId = models.length + 1 */
+  // Create a new item object
+  const newObject = { title: newModel.title, id: newId, type: newModel.type, imgUrl: img };
+
+  // POST Request
+  const postData = async () => {
+    const postResponse = await mock.post("", newObject )
+    setModels([postResponse.data, ...models])
+    setFilters([postResponse.data, ...models])
+    //setModels((prev)=>[postResponse.data, ...prev])
+  }
   const handleAddModel = (e) => {
-    // Generate ID
     e.preventDefault()
-
-    const newId = Math.max(...remove.map((model) => model.id), 0) + 1;
-    /* const newId = remove.length + 1 ; */
-
-    // Create a new item object
-    const newObject = { title: newModel.title, id: newId, type: newModel.type, imgUrl: img };
-    console.log(newObject)
-
     // Update the state with the new item
-    setRemove([...remove, newObject]);
-    console.log(remove)
-
+    /* setModels([...models, newObject]); */
+    postData([...models, newObject])
     // Clear the input fields
     setNewModel({
-       id: null,
-       title: '',
-       type: '',
-      });
+      id: null,
+      title: '',
+      type: '',
+      /* imgUrl: '', */
+     });
+    setBlur(false)
   };
-  /* const handleChange = (e) => {
-    setNewModel({ ...newModel, title: e.target.value });
-  };*/
+
+  // PUT Request
+  const handleEdit = async (id) => {
+    const updateData = {
+      id,
+      /* title: editTitle,
+      type: editType */
+    }
+    try {
+      const response = await mock.put(`${id}`, updateData)
+    } catch (err) {
+      console.log(`Error: ${err.emssage}`)
+    }
+  }
+
+  /* Sorting func */
+  const handleSort = () => {
+  const sorted = models.toSorted((a, b)=> a.title.localeCompare(b.title))
+  setFilters(sorted);
+  /* console.log(sorted) */
+  }
+  /* Toggle for object filter */
+  /* const [toggle, setToggle] = useState(false);
+  const toggleButton = () => {
+    setToggle(!toggle);
+  }; */
+
+  /* Filtering func */
+
+  const handleObject = () => {
+    // Filter objects
+    const filter = models.filter((model) => model.type === 'object')
+    /* setFilters(filter) */
+    setFilters(filter)
+    console.log(filter)
+  }
+
+  const handleScene = () => {
+    // Filter scenes
+    const filter = models.filter((model) => model.type === 'scene')
+    setFilters(filter)
+    console.log(filter)
+  }
+
+  const handleAbstract = () => {
+    // Filter abstracts
+    const filter = models.filter((model) => model.type === 'abstract')
+    setFilters(filter)
+    console.log(filter)
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewModel({ ...newModel, [name]:value });
   };
+
+  const [itemBlur, setBlur]= useState(false)
   const handleBlur = () => {
-    console.log('Title field is empty.')
+    setBlur(true)
   }
 
   return (
   <Box>
     <div className="container justify-content-center align-items-center" id="items">
       <div className="container my-4 flex col-lg-4" id="title">
-      <Text as='h4' py={6} fontWeight='semibold' fontSize={['26','30','38']}>All Models</Text>
-      <HStack pb={8}>
-      {/* <Button className='model-btn'>Scenes</Button>
-      <Button className='model-btn'>Abstracts</Button> */}
-      <Button
-      className='model-btn'
-      onClick={() => toggleButton()}
-      >
-        Objects
-      </Button>
-      <Button
-      className='model-btn'
-      onClick={() => handleSort()}
-      >
-        Sort by name
-      </Button>
-      </HStack>
+        <Button as='h4' py={6} fontWeight='semibold' fontSize={['26','30','38']} onClick={() => fetchData()}>All Models</Button>
+        <HStack pb={8}>
+          <Button className='model-btn' onClick={() => handleObject()}>Objects</Button>
+          <Button className='model-btn' onClick={() => handleScene()}>Scenes</Button>
+          <Button className='model-btn' onClick={() => handleAbstract()}>Abstracts</Button>
+          <Button className='model-btn' onClick={() => handleSort()}>Sort by name</Button>
+        </HStack>
       </div>
       <div className="d-flex flex-wrap my-4 flex col-lg-12 justify-center" id="container">
-      {toggle ?
-        (<Object/>) : (
         <SimpleGrid
           gridTemplateColumns="repeat(3,minmax(200px,1fr))"
           columns={{md:2, lg:3, xl:4}}
           gridGap={4}
           justifyContent='center'
          >
-          {remove.map((model) => (
-          <Box id='cont' borderRadius='xl' boxShadow='dark-lg'>
+          {filters.map((model) => (
             <ModelCard
             key={model.id}
+            id={model.id}
             title={model.title}
             type={model.type}
             imgUrl={model.imgUrl}
-            position='relative'
+            deleteData={deleteData}
             />
-            <Flex gap='4' justifyContent='center'>
-            {/* <Button sx={style} className='edit-btn'>Edit</Button> */}
-            <Button m='2' sx={style} onClick={() => handleRemove(model.id)} className='edit-btn'>Remove</Button>
-            </Flex>
-          </Box>
-          ))
+        ))
         }
+          {/* <Box id='cont' borderRadius='xl' boxShadow='dark-lg'> </Box> */}
       </SimpleGrid>
-      )}
       </div>
     </div>
     <Container my='12' justifyContent='center' textAlign='center'>
@@ -131,7 +196,7 @@ const Models = () => {
       <Text as='h4'>Add New Model</Text>
       <form onSubmit={handleAddModel}>
         <VStack alignItems='start'>
-        <FormControl isInvalid={false} isRequired>
+        <FormControl isInvalid={itemBlur && newModel.title === ""} isRequired>
           <FormLabel htmlFor="title">Title</FormLabel>
           <Input
           id="title"
@@ -145,7 +210,9 @@ const Models = () => {
             required: 'Title is required',
           })} */
           />
-          <FormErrorMessage>Title is required</FormErrorMessage>
+          {handleBlur &&
+          <FormErrorMessage>Please type a title</FormErrorMessage>
+          }
         </FormControl>
         <FormControl isInvalid={false} isRequired>
           <FormLabel htmlFor="type">Type:</FormLabel>
@@ -159,6 +226,19 @@ const Models = () => {
           </Select>
           <FormErrorMessage></FormErrorMessage>
         </FormControl>
+       {/*  <FormControl isInvalid={false}>
+          <FormLabel htmlFor="image">Image</FormLabel>
+          <Input
+          id="image"
+          type="url"
+          name="imgUrl"
+          value={newModel.imgUrl}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder='Enter a model image'
+          />
+          <FormErrorMessage></FormErrorMessage>
+        </FormControl> */}
           <Button alignSelf='center' className='model-btn' my='2' type="submit">
             Submit Model
           </Button>
@@ -170,4 +250,4 @@ const Models = () => {
   )
 }
 
-export default Models
+export default Models;
