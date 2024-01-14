@@ -28,13 +28,13 @@
       "id": 5,
       "title": "Dimensions",
       "type": "scene",
-      "imgUrl": "Assets/trent-pickering-gPe52XyVGhU-unsplash.jpg"
+      "imgUrl": "Assets/trent_pickering_unsplash.jpg"
     },
     {
       "id": 6,
       "title": "Passage",
       "type": "scene",
-      "imgUrl": "Assets/sharath-kumar-hari-CaQYGwIGC3g-unsplash.jpg"
+      "imgUrl": "Assets/sharathkumar_hari_unsplash.jpg"
     },
     {
       "id": 7,
@@ -46,7 +46,7 @@
       "id": 8,
       "title": "Full Moon",
       "type": "object",
-      "imgUrl": "Assets/viktor-forgacs-FZtyDSI8wo0-unsplash.jpg"
+      "imgUrl": "Assets/viktor_forgacs_unsplash.jpg"
     },
     {
       "id": 9,
@@ -64,19 +64,19 @@
       "id": 11,
       "title": "Flare Star",
       "type": "abstract",
-      "imgUrl": "Assets/simon-lee-vYsX30q0ARE-unsplash.jpg"
+      "imgUrl": "Assets/simon_lee_unsplash.jpg"
     },
     {
       "id": 12,
       "title": "See through",
       "type": "object",
-      "imgUrl": "Assets/gaspar-uhas-j_DmMNZK-jo-unsplash.jpg"
+      "imgUrl": "Assets/gaspar_uhasj_unsplash.jpg"
     },
     {
       "id": 13,
       "title": "Kintsugi",
       "type": "object",
-      "imgUrl": "Assets/simon-lee-U00xWfo5yJA-unsplash.jpg"
+      "imgUrl": "Assets/simonlee_unsplash2.jpg"
     }
   ]
 }
