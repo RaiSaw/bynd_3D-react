@@ -21,7 +21,7 @@ const GalleryCateg = () => {
           <p className="bt"><a className="btn btn-secondary" href="/">View more &raquo;</a></p>
         </div>
         <div className="col-lg-4 justify-center">
-          <img className="bd-placeholder-img rounded-circle" width="140" height="140" src="Assets/simon-lee-vYsX30q0ARE-unsplash.jpg" alt='3dAbstract'/>
+          <img className="bd-placeholder-img rounded-circle" width="140" height="140" src="Assets/simon_lee_unsplash.jpg" alt='3dAbstract'/>
           <h2 className="fw-normal">Materials, Textures and HDRIs</h2>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
           <p className="bt"><a className="btn btn-secondary" href="/">View more &raquo;</a></p>

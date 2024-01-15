@@ -1,74 +1,66 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect, useContext } from 'react'
 import { Box, Text, Button, HStack, Select, SimpleGrid, VStack, Container, Card, FormLabel, Input, FormControl, FormErrorMessage } from "@chakra-ui/react";
 import ModelCard from './ModelCard'
 import axios from 'axios'
 import '../App.css'
-import { defineStyle } from '@chakra-ui/react'
 /* import model from '../models.json'  import {Bmodels} from '../models'*/
 //import Object from './filterObject';
 //import { useForm } from 'react-hook-form'
-export const style = defineStyle({
-  mb: '2',
-  borderRadius: 'xl',
-  fontWeight: 'semibold',
-  color: 'white',
-  fontSize: {
-    md: '8',
-    lg:'10',
-  },
-  textShadow: '1px 1px 1px mediumblue',
-})
 
 const Models = () => {
-  // main state
+  // states
   const [models, setModels] = useState([]);
   const [filters, setFilters] = useState(models);
+  /* const axios = require('axios'); */
   // instance
   const mock = axios.create({
-    baseURL: 'http://localhost:3001/models/'
+    baseURL: 'http://localhost:3001/models'
   });
   console.log(models)
 
   // GET Request
   const fetchData = async () => {
+    try {
     const getResponse = await mock.get("")
       setModels(getResponse.data)
       setFilters(getResponse.data)
+    } catch (err) {
+      console.log(`Error: ${err.emssage}`)
+    }
   }
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  //DELETE Request
-  const deleteData = async (id) => {
+  // DELETE Request
+  /* const deleteData = async (id) => {
+  try {
     await mock.delete(`${id}`)
-    .then(response => {
-      console.log(`Data with id ${id} deleted successfully:`, response.data);
-    })
-    .catch(error => {
-      console.error('Error deleting data:', error);
-    });
-    setModels(models.filter((model) => model.id !== id))
-    setFilters(models.filter((model) => model.id !== id))
+  } catch (err) {
+    console.log(`Error: ${err.message}`)
   }
-  /* Remove object func */
-  /* const handleRemove = async (idToRemove) => {
+    setModels(models.filter((model) => model.id !== id))
+  } */
+  /* REMOVE Model*/
+  const deleteData = async (idToRemove) => {
     await mock.delete(`${idToRemove}`)
-    Create a new array without the item to be removed just in state
+    //Create a new array without the item to be removed just in state
     const removed = models.filter((model) => model.id !== idToRemove);
     setModels(removed);
     console.log(removed)
-  }; */
+    .then(response => console.log(response))
+    .catch(err => console.log(err.message))
+  };
 
-  // Add model
+  // ADD model
   const [newModel, setNewModel] = useState({
      id: null,
      title: '',
      type: '',
   });
   // Image sample
-  const img = 'Assets/simon-lee-U00xWfo5yJA-unsplash.jpg'
+  const img = 'Assets/simon_lee_unsplash.jpg'
   // Generate ID
   const newId = Math.max(...models.map((model) => model.id), 0) + 1;
   /* const newId = models.length + 1 */
@@ -80,8 +72,9 @@ const Models = () => {
     const postResponse = await mock.post("", newObject )
     setModels([postResponse.data, ...models])
     setFilters([postResponse.data, ...models])
-    //setModels((prev)=>[postResponse.data, ...prev])
+    //((prev)=>[postResponse.data, ...prev])
   }
+  // Handle submit
   const handleAddModel = (e) => {
     e.preventDefault()
     // Update the state with the new item
@@ -96,39 +89,78 @@ const Models = () => {
      });
     setBlur(false)
   };
-
-  // PUT Request
-  const handleEdit = async (id) => {
-    const updateData = {
-      id,
-      /* title: editTitle,
-      type: editType */
-    }
-    try {
-      const response = await mock.put(`${id}`, updateData)
-    } catch (err) {
-      console.log(`Error: ${err.emssage}`)
-    }
+  //handle input
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewModel({ ...newModel, [name]:value });
+  };
+  //validation-blur
+  const [itemBlur, setBlur]= useState(false)
+  const handleBlur = () => {
+    setBlur(true)
   }
 
-  /* Sorting func */
+  //EDIT model data
+  const [edited, setEdited] = useState({
+    title: models.title,
+    type: models.type,
+  });
+  const handleInput = (e) => {
+    setEdited({...edited, [e.target.name]: e.target.value})
+  }
+  const handleSubmit = async (id) => {
+    const response = await mock.patch(`${id}`, {edited})
+    .then(response => console.log(response))
+    .catch(err => console.log(err.message))
+    setModels([...models, {title:edited}])
+  }
+  const [editTitle, setEditTitle] = useState(models.title);
+  const updateTitle = { title: editTitle};
+  // PATCH Request 1
+  const editData = async (id) => {
+    try {
+      const response = await mock.patch(`${id}`, updateTitle)
+      setModels([response.data, ...models])
+      /* setFilters([response.data, ...models]) */
+    } catch (err) {
+      console.log(`Error: ${err.message}`)
+    }
+  }
+  // PATCH Request - Chakra editable component
+  const handleEditSubmit = async (id) => {
+    try {
+      const getResponse = await mock.patch(`${id}`)
+        /* setFilters(getResponse.data) */
+    } catch (err) {
+        console.log(`Error: ${err.emssage}`)
+    }
+  }
+  // handle submit
+  const handleEdit = (e) => {
+    e.preventDefault()
+    //call editAxiosfunc here
+  }
+
+  const handleChangeTitle = (e) => {
+    setEditTitle(e.target.value)
+  }
+
+  /* Sorting function */
   const handleSort = () => {
   const sorted = models.toSorted((a, b)=> a.title.localeCompare(b.title))
   setFilters(sorted);
   /* console.log(sorted) */
   }
-  /* Toggle for object filter */
+  /* Toggle */
   /* const [toggle, setToggle] = useState(false);
   const toggleButton = () => {
     setToggle(!toggle);
   }; */
 
-  /* Filtering func */
-
+  /* Filtering function */
   const handleObject = () => {
     // Filter objects
     const filter = models.filter((model) => model.type === 'object')
-    /* setFilters(filter) */
     setFilters(filter)
     console.log(filter)
   }
@@ -145,16 +177,6 @@ const Models = () => {
     const filter = models.filter((model) => model.type === 'abstract')
     setFilters(filter)
     console.log(filter)
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewModel({ ...newModel, [name]:value });
-  };
-
-  const [itemBlur, setBlur]= useState(false)
-  const handleBlur = () => {
-    setBlur(true)
   }
 
   return (
@@ -183,11 +205,18 @@ const Models = () => {
             title={model.title}
             type={model.type}
             imgUrl={model.imgUrl}
+            //patch
             deleteData={deleteData}
+            handleChangeTitle={handleChangeTitle}
+            editData={editData}
+            //put
+            handleInput={handleInput}
+            handleSubmit={handleSubmit}
+            setEdited={setEdited}
+            edited={edited}
             />
         ))
         }
-          {/* <Box id='cont' borderRadius='xl' boxShadow='dark-lg'> </Box> */}
       </SimpleGrid>
       </div>
     </div>
