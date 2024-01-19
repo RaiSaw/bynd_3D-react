@@ -11,7 +11,7 @@ const Explore = () => {
       right={0}
       margin='0 auto'
       height={700}
-      bg='gray'
+      bg='teal'
       alignContent='center'
       justifyContent='center'
       justifyItems='center'

@@ -1,16 +1,16 @@
 {
-  "models": [
+  "model": [
     {
       "id": 1,
       "title": "Bodies",
       "type": "object",
-      "imgUrl": "Assets/javier_miranda_unsplash.jpg"
+      "imgUrl": "Assets/javierMirandaUnsplash.jpg"
     },
     {
       "id": 2,
-      "title": "Mandalorian helmet",
+      "title": "Helmet",
       "type": "object",
-      "imgUrl": "Assets/lekoarts_unsplash.jpg"
+      "imgUrl": "Assets/lekoartsUnsplash.jpg"
     },
     {
       "id": 3,
@@ -52,7 +52,7 @@
       "id": 9,
       "title": "Purple Flame",
       "type": "abstract",
-      "imgUrl": "Assets/Particle3.png"
+      "imgUrl": "Assets/Particle.png"
     },
     {
       "id": 10,
@@ -76,6 +76,12 @@
       "id": 13,
       "title": "Kintsugi",
       "type": "object",
+      "imgUrl": "Assets/simonlee_unsplash2.jpg"
+    },
+    {
+      "id": 14,
+      "title": "Hand",
+      "type": "scene",
       "imgUrl": "Assets/simonlee_unsplash2.jpg"
     }
   ]

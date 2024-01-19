@@ -1,8 +1,9 @@
-import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, Label, EditablePreview, Editable, EditableInput, Input } from "@chakra-ui/react";
-import { EditIcon, CheckIcon, CloseIcon, } from '@chakra-ui/icons'
-import React, {useState} from "react";
+import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, EditablePreview, Editable, EditableInput, Input, Select, useDisclosure, FormLabel, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, ModalFooter } from "@chakra-ui/react";
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
+import React, {useRef} from "react";
 import {motion} from 'framer-motion'
 import { defineStyle } from '@chakra-ui/react'
+import { modelTypes } from "../Pages/Gallery";
 import '../App.css'
 
 export const style = defineStyle({
@@ -16,12 +17,12 @@ export const style = defineStyle({
   },
   textShadow: '1px 1px 1px mediumblue',
 })
+
 const EditableControls =  () => {
   const {
     isEditing,
     getSubmitButtonProps,
     getCancelButtonProps,
-    getEditButtonProps,
   } = useEditableControls()
 
   return isEditing ? (
@@ -35,8 +36,10 @@ const EditableControls =  () => {
   ) : null;
 }
 
-
-const ModelCard = ({ title, imgUrl, type, deleteData, id, handleChangeTitle, editData, handleSubmit, handleInput, edited, setEdited }) => {
+const ModelCard = ({ title, imgUrl, type, deleteData, id, handleChangeTitle, editData, handleSubmit, handleInput, edited, setEdited, EditPost }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const initialRef = useRef(null)
+  const finalRef = useRef(null)
     return(
       <Box id='cont' borderRadius='xl' boxShadow='dark-lg'>
         <Card
@@ -51,6 +54,7 @@ const ModelCard = ({ title, imgUrl, type, deleteData, id, handleChangeTitle, edi
         textShadow='1px 1px #000'
         alt={`${title} image`}
         type={type}
+        id={id}
         filter='auto'
         invert='8%'
         fontFamily={'Poppins'}
@@ -80,12 +84,10 @@ const ModelCard = ({ title, imgUrl, type, deleteData, id, handleChangeTitle, edi
             }}
           />
           </Tooltip>
-            {/* <EditablePreview _hover={{
-              background: useColorModeValue("gray.500", "gray.700"), px:'2'
-            }}/> */}
             <Input
             as={EditableInput}
             name='title'
+            id='title'
             />
             <EditableControls/>
           </Editable>
@@ -109,44 +111,63 @@ const ModelCard = ({ title, imgUrl, type, deleteData, id, handleChangeTitle, edi
             }}
           />
           </Tooltip>
-            <Input
-            as={EditableInput}
-            name='type'
-            />
+          <EditableInput
+          as={Select}
+          name='type'
+          id='type'
+          >
+            {modelTypes.map((opt) =>(
+              <option key={opt.id}>{opt.type}</option>
+            ))}
+          </EditableInput>
             <EditableControls/>
           </Editable>
           </Flex>
-          {/* <Flex gap='2' fontSize={['8','9','11']}>
-          <Text>Creator:</Text>
-          <Editable
-          isPreviewFocusable={true}
-          selectAllOnFocus={false}
-          defaultValue='Name'
-          fontSize='sm'
-          >
-          <Tooltip label="Click to edit" shouldWrapChildren={true}>
-          <EditablePreview
-            px={2}
-            _hover={{
-              background: useColorModeValue("gray.600", "gray.700")
-            }}
-          />
-          </Tooltip>
-            <Input
-            as={EditableInput}
-            onChange={handleEdit}
-            />
-            <EditableControls/>
-          </Editable>
-          </Flex> */}
           </VStack>
           {/* <Image src={imageSrc} alt={alt} objectFit='cover' borderRadius="xl" height='100%' width='100%'/> */}
         </CardBody>
-      </Card>
-      <Flex gap='4' justifyContent='center'>
-             <Button m='2' className='edit-btn'>Edit</Button>
-             <Button m='2' onClick={() => deleteData(id)} className='edit-btn'>Remove</Button>
+        </Card>
+        <Flex gap='4' justifyContent='center'>
+          <Button className='edit-btn' m='2' onClick={onOpen}>Edit</Button>
+          <Button className='edit-btn' m='2' onClick={() => deleteData(id)}>Remove</Button>
         </Flex>
+        <Modal
+        isCentered
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        blockScrollOnMount={false} /* scroll body even not in focus */
+        /* closeOnOverlayClick={true} */
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit model</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Title</FormLabel>
+              <Input id="title" type="text" name="title" ref={initialRef} defaultValue={title}/>
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Type</FormLabel>
+              <Select id="type" type="type" name="type" defaultValue={type}>
+              {modelTypes.map((type) => (
+                <option key={type.id}>{type.type}</option>
+              ))}
+            </Select>
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button id="signup-btn" mr={3}>
+              Save
+            </Button>
+            <Button className="edit-btn"onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       </Box>
     )
 }

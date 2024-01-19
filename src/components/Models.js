@@ -1,21 +1,18 @@
-import React, {useState, useEffect, useContext } from 'react'
+import React, {useState, useEffect} from 'react'
 import { Box, Text, Button, HStack, Select, SimpleGrid, VStack, Container, Card, FormLabel, Input, FormControl, FormErrorMessage } from "@chakra-ui/react";
 import ModelCard from './ModelCard'
-import axios from 'axios'
+import { modelTypes } from "../Pages/Gallery";
+/* import axios from 'axios' */
 import '../App.css'
 /* import model from '../models.json'  import {Bmodels} from '../models'*/
 //import Object from './filterObject';
 //import { useForm } from 'react-hook-form'
 
-const Models = () => {
+const Models = ({mock}) => {
   // states
   const [models, setModels] = useState([]);
   const [filters, setFilters] = useState(models);
-  /* const axios = require('axios'); */
-  // instance
-  const mock = axios.create({
-    baseURL: 'http://localhost:3001/models'
-  });
+
   console.log(models)
 
   // GET Request
@@ -34,17 +31,18 @@ const Models = () => {
   }, []);
 
   // DELETE Request
-  /* const deleteData = async (id) => {
+  const deleteData = async (id) => {
   try {
     await mock.delete(`${id}`)
   } catch (err) {
     console.log(`Error: ${err.message}`)
   }
     setModels(models.filter((model) => model.id !== id))
-  } */
-  /* REMOVE Model*/
+  }
+
+  /* REMOVE Model
   const deleteData = async (idToRemove) => {
-    await mock.delete(`${idToRemove}`)
+    await mock.delete(`/models/${idToRemove}`)
     //Create a new array without the item to be removed just in state
     const removed = models.filter((model) => model.id !== idToRemove);
     setModels(removed);
@@ -52,6 +50,7 @@ const Models = () => {
     .then(response => console.log(response))
     .catch(err => console.log(err.message))
   };
+  */
 
   // ADD model
   const [newModel, setNewModel] = useState({
@@ -60,7 +59,7 @@ const Models = () => {
      type: '',
   });
   // Image sample
-  const img = 'Assets/simon_lee_unsplash.jpg'
+  const img = 'Assets/simonlee_unsplash2.jpg'
   // Generate ID
   const newId = Math.max(...models.map((model) => model.id), 0) + 1;
   /* const newId = models.length + 1 */
@@ -112,7 +111,7 @@ const Models = () => {
     const response = await mock.patch(`${id}`, {edited})
     .then(response => console.log(response))
     .catch(err => console.log(err.message))
-    setModels([...models, {title:edited}])
+    setModels([...models, edited])
   }
   const [editTitle, setEditTitle] = useState(models.title);
   const updateTitle = { title: editTitle};
@@ -222,58 +221,42 @@ const Models = () => {
     </div>
     <Container my='12' justifyContent='center' textAlign='center'>
       <Card p='2' boxShadow='2xl'>
-      <Text as='h4'>Add New Model</Text>
-      <form onSubmit={handleAddModel}>
-        <VStack alignItems='start'>
-        <FormControl isInvalid={itemBlur && newModel.title === ""} isRequired>
-          <FormLabel htmlFor="title">Title</FormLabel>
-          <Input
-          id="title"
-          type="text"
-          name="title"
-          value={newModel.title}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder='Enter a title model'
-          /* {...register('title', {
-            required: 'Title is required',
-          })} */
-          />
-          {handleBlur &&
-          <FormErrorMessage>Please type a title</FormErrorMessage>
-          }
-        </FormControl>
-        <FormControl isInvalid={false} isRequired>
-          <FormLabel htmlFor="type">Type:</FormLabel>
-          <Select id="type" type="type" name="type" value={newModel.type} onChange={handleChange} placeholder='Select a model type'>
-          {/*{Object.values(modelTypes).map((type) => (
-              <option key={type} value={type}>{type}</option>
-            ))} */}
-            <option value="object">object</option>
-            <option value="scene">scene</option>
-            <option value="abstract">abstract</option>
-          </Select>
-          <FormErrorMessage></FormErrorMessage>
-        </FormControl>
-       {/*  <FormControl isInvalid={false}>
-          <FormLabel htmlFor="image">Image</FormLabel>
-          <Input
-          id="image"
-          type="url"
-          name="imgUrl"
-          value={newModel.imgUrl}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder='Enter a model image'
-          />
-          <FormErrorMessage></FormErrorMessage>
-        </FormControl> */}
+        <Text as='h4'>Add New Model</Text>
+        <form onSubmit={handleAddModel}>
+          <VStack alignItems='start'>
+          <FormControl isInvalid={itemBlur && newModel.title === ""} isRequired>
+            <FormLabel htmlFor="title">Title</FormLabel>
+            <Input
+            id="title"
+            type="text"
+            name="title"
+            value={newModel.title}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder='Enter a title model'
+            /* {...register('title', {
+              required: 'Title is required',
+            })} */
+            />
+            {handleBlur &&
+            <FormErrorMessage>Please type a title</FormErrorMessage>
+            }
+          </FormControl>
+          <FormControl isInvalid={false} isRequired>
+            <FormLabel htmlFor="type">Type:</FormLabel>
+            <Select id="type" type="type" name="type" value={newModel.type} onChange={handleChange} placeholder='Select a model type'>
+            {modelTypes.map((type) => (
+                <option key={type.id}>{type.type}</option>
+              ))}
+            </Select>
+            <FormErrorMessage></FormErrorMessage>
+          </FormControl>
           <Button alignSelf='center' className='model-btn' my='2' type="submit">
             Submit Model
           </Button>
           </VStack>
         </form>
-        </Card>
+      </Card>
       </Container>
   </Box>
   )

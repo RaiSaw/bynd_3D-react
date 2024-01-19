@@ -2,7 +2,7 @@ import '../App.css'
 import { NavLink, Link } from "react-router-dom";
 import React, { useEffect, useRef } from "react";
 import {HamburgerIcon} from '@chakra-ui/icons'
-import { Circle, Image, Spacer} from "@chakra-ui/react";
+import { Button, Circle, Image, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Spacer} from "@chakra-ui/react";
 
 const Header = () => {
   const headerRef = useRef(null);
@@ -52,40 +52,35 @@ const Header = () => {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         {/* <li className="nav-item"> */}
           <NavLink className="link" to='/' aria-current="page" exact='true'>Home</NavLink>
-        {/* </li> */}
-          {/*
-            <a className="nav-link" href="/">Home</a>
-          */}
-          {/* <li className="nav-item"> */}
           <NavLink className="link" to="/gallery">Gallery</NavLink>
-          {/* </li> */}
-          {/* <li className="nav-item">
-            <a className="nav-link" href="/gallery.html">Gallery</a>
-          */}
-          <NavLink className="link" to="/explore">Explore</NavLink>
-          {/* <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <Menu>
+            <MenuButton className='link'>
               Explore
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="/">Learn</a></li>
-              <li><a className="dropdown-item" href="/">Create</a></li>
-              <li><a className="dropdown-item" href="/">Generate with AI ✨</a></li>
-            </ul>
-          </li> */}
-          <NavLink className="link" to="/connect">Connect</NavLink>
-          {/* <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Connect
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="/">About</a></li>
-              <li><a className="dropdown-item" href="/">FAQs</a></li>
-              <li><a className="dropdown-item" href="/">Community</a></li>
-              <li><hr className="dropdown-divider"/></li>
-              <li><a className="dropdown-item" href="card.html">Contact us</a></li>
-            </ul>
-          </li> */}
+            </MenuButton>
+            <MenuList>
+              <MenuGroup>
+                <MenuItem>Learn</MenuItem>
+                <MenuItem>Playground</MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title='New'>
+                <MenuItem>Create with AI✨</MenuItem>
+                <MenuItem>Capture</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
+          <Menu>
+          <MenuButton className="link">Connect</MenuButton>
+            <MenuList>
+                <MenuItem>About</MenuItem>
+                <MenuItem>Community</MenuItem>
+              <MenuDivider />
+              <MenuGroup title='Help'>
+                <MenuItem><NavLink to="/contact">Contact us</NavLink></MenuItem>
+                <MenuItem>FAQs</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
         </ul>
         <Spacer/>
         <form className="d-flex col-lg-6" role="search">

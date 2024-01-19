@@ -12,7 +12,6 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.6.5",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.5",
     "react": "^18.2.0",
@@ -27,7 +26,7 @@
   "proxy": "http://localhost:3001",
   "scripts": {
     "start": "concurrently 'npm run start:frontend' 'npm run start:backend'",
-    "start:frontend": "env PORT=3000 react-scripts start",
+    "start:frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -52,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "axios": "^1.6.5",
     "concurrently": "^8.2.2",
     "json-server": "^1.0.0-alpha.17"
   }
