@@ -226,7 +226,7 @@ const handleBlur = () => {
       <Box>
         <div className="container justify-content-center    align-items-center" id="items">
           <div className="container my-4 flex col-lg-4" id="title">
-            <Button as='h4' py={6} fontWeight='semibold' fontSize=    {['26','30','38']} onClick={() => fetchData()}>All Models</   Button>
+            <Button as='h4' py={6} fontWeight='semibold' fontSize={['26','30','38']} onClick={() => fetchData()}>All Models</   Button>
             <HStack pb={8}>
               <Button className='model-btn' onClick={() => handleObject   ()}>Objects</Button>
               <Button className='model-btn' onClick={() => handleScene    ()}>Scenes</Button>

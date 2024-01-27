@@ -22,19 +22,19 @@
       "id": 4,
       "title": "Wormhole",
       "type": "scene",
-      "imgUrl": "Assets/shubham_dhage_unsplash.jpg"
+      "imgUrl": "Assets/shubhamdhageUnsplash.jpg"
     },
     {
       "id": 5,
       "title": "Dimensions",
       "type": "scene",
-      "imgUrl": "Assets/trent_pickering_unsplash.jpg"
+      "imgUrl": "Assets/trentpickeringUnsplash.jpg"
     },
     {
       "id": 6,
       "title": "Passage",
       "type": "scene",
-      "imgUrl": "Assets/sharathkumar_hari_unsplash.jpg"
+      "imgUrl": "Assets/sharathkumarhariUnsplash.jpg"
     },
     {
       "id": 7,
@@ -46,7 +46,7 @@
       "id": 8,
       "title": "Full Moon",
       "type": "object",
-      "imgUrl": "Assets/viktor_forgacs_unsplash.jpg"
+      "imgUrl": "Assets/viktorforgacsUnsplash.jpg"
     },
     {
       "id": 9,
@@ -64,25 +64,19 @@
       "id": 11,
       "title": "Flare Star",
       "type": "abstract",
-      "imgUrl": "Assets/simon_lee_unsplash.jpg"
+      "imgUrl": "Assets/simonleeUnsplash.jpg"
     },
     {
       "id": 12,
       "title": "See through",
       "type": "object",
-      "imgUrl": "Assets/gaspar_uhasj_unsplash.jpg"
+      "imgUrl": "Assets/gasparuhasjUnsplash.jpg"
     },
     {
       "id": 13,
       "title": "Kintsugi",
       "type": "object",
-      "imgUrl": "Assets/simonlee_unsplash2.jpg"
-    },
-    {
-      "id": 14,
-      "title": "Hand",
-      "type": "scene",
-      "imgUrl": "Assets/simonlee_unsplash2.jpg"
+      "imgUrl": "Assets/simonleeUnsplash2.jpg"
     }
   ]
 }
